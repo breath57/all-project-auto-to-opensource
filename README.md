@@ -34,40 +34,38 @@ Open-sourcing a private project is tedious and error-prone:
 ## 📦 Installation
 
 ```bash
-npx skills add nicepkg/all-project-auto-to-opensource
+npx skills add breath57/all-project-auto-to-opensource/skills/en
 ```
-
-Or manually clone to your `.agents/skills/` directory:
-
-```bash
-git clone https://github.com/nicepkg/all-project-auto-to-opensource.git .agents/skills/all-project-auto-to-opensource
-```
-
-## 🗂️ Choose Your Language
-
-Skills are available in **English** and **Chinese**:
-
-| Language | Path | Status |
-|----------|------|--------|
-| 🇬🇧 English | `skills/en/all-project-auto-to-opensource/` | ✅ Default |
-| 🇨🇳 中文 | `skills/cn/all-project-auto-to-opensource/` | ✅ Available |
-
-After installation, copy the version you need into your `.agents/skills/` directory.
 
 ## 🔄 How It Works
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Phase 0-1   │────▶│  Phase 2-3   │────▶│  Phase 4-5   │────▶│  Phase 6-8   │
-│  Analyze     │     │  Plan        │     │  Execute     │     │  Verify      │
-│              │     │              │     │              │     │              │
-│ • Copy proj  │     │ • Choose L1/ │     │ • Security   │     │ • Run tests  │
-│ • Deep scan  │     │   L2/L3      │     │ • Pruning    │     │ • Final scan │
-│ • Find       │     │ • Name repo  │     │ • Cleanup    │     │ • README     │
-│   secrets    │     │ • Confirm    │     │ • Docs + CI  │     │ • Git init   │
-│              │     │   plan       │     │              │     │              │
-│   🛑 STOP    │     │   🛑 STOP    │     │   🛑 STOP    │     │   🛑 STOP    │
-└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+```mermaid
+flowchart LR
+    subgraph P01["Phase 0-1 · Analyze"]
+        direction TB
+        P01a["Copy project / Deep scan / Find secrets"]
+        P01s["🛑 STOP"]
+        P01a --> P01s
+    end
+    subgraph P23["Phase 2-3 · Plan"]
+        direction TB
+        P23a["Choose L1·L2·L3 / Name repo / Confirm plan"]
+        P23s["🛑 STOP"]
+        P23a --> P23s
+    end
+    subgraph P45["Phase 4-5 · Execute"]
+        direction TB
+        P45a["Security / Pruning / Cleanup / Docs + CI"]
+        P45s["🛑 STOP"]
+        P45a --> P45s
+    end
+    subgraph P68["Phase 6-8 · Verify"]
+        direction TB
+        P68a["Run tests / Final scan / README / Git init"]
+        P68s["🛑 STOP"]
+        P68a --> P68s
+    end
+    P01 --> P23 --> P45 --> P68
 ```
 
 ### 3 Target Levels
@@ -90,34 +88,30 @@ The AI **never** makes critical decisions for you. At each 🛑 STOP point, it p
 
 ## 📁 Skill Structure
 
-```
-skills/
-├── en/                               # 🇬🇧 English version
-│   └── all-project-auto-to-opensource/
-│       ├── SKILL.md                  # Main skill document
-│       ├── references/
-│       │   ├── anti-drift.md         # Anti-forgetting mechanisms
-│       │   ├── cleanup-checklist.md  # Detailed cleanup checklist
-│       │   ├── deep-pruning.md       # Deep pruning guide
-│       │   ├── project-standards.md  # Open source project standards
-│       │   ├── sensitive-patterns.md # Sensitive info scan patterns
-│       │   └── tracking-templates.md # Tracking file templates
-│       └── scripts/
-│           ├── copy-project.sh       # Copy project (exclude .git)
-│           ├── scan-secrets.sh       # Scan for secrets
-│           └── init-tracking.sh      # Init tracking files
-└── cn/                               # 🇨🇳 Chinese version
-    └── all-project-auto-to-opensource/
-        ├── SKILL.md
-        ├── references/
-        └── scripts/
+```mermaid
+flowchart TB
+    root(["skills/"])
+    en(["en/ · 🇬🇧 English"])
+    cn(["cn/ · 🇨🇳 Chinese"])
+    root --> en
+    root --> cn
+    pkgE["all-project-auto-to-opensource/"]
+    pkgC["all-project-auto-to-opensource/"]
+    en --> pkgE
+    cn --> pkgC
+    pkgE --> e_md["SKILL.md · main document"]
+    pkgE --> e_ref["references/ · anti-drift, cleanup-checklist, deep-pruning, project-standards, sensitive-patterns, tracking-templates"]
+    pkgE --> e_scr["scripts/ · copy-project, scan-secrets, init-tracking"]
+    pkgC --> c_md["SKILL.md"]
+    pkgC --> c_ref["references/"]
+    pkgC --> c_scr["scripts/"]
 ```
 
 ## 🚀 Quick Start
 
 1. **Install the skill:**
    ```bash
-   npx skills add nicepkg/all-project-auto-to-opensource
+   npx skills add breath57/all-project-auto-to-opensource/skills/en
    ```
 
 2. **Tell your AI assistant:**
